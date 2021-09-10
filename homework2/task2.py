@@ -13,9 +13,12 @@ Output: 2, 1
 """
 
 from typing import List, Tuple
-from collections import Counter
 
 
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
-    a = list(Counter(inp))
-    return a[0], a[-1]
+    total = {}
+    for el in inp:
+        total[el] = inp.count(el)
+    lst_el = list(total.items())
+    lst_el.sort(key=lambda i: i[1], reverse=True)
+    return lst_el[0][0], lst_el[-1][0]

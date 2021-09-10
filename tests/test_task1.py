@@ -6,7 +6,7 @@ def test_get_longest_diverse_words():
 
 
 def test_get_rarest_char():
-    assert task1.get_rarest_char('data.txt') == ')'
+    assert task1.get_rarest_char('data.txt') == '›'
 
 
 def test_count_punctuation_chars():

@@ -6,7 +6,6 @@ Given a file containing text. Complete using only default collections:
     4) Count every non ascii char
     5) Find most common non ascii char for document
 """
-from collections import Counter
 import string
 from typing import List
 
@@ -14,8 +13,7 @@ from typing import List
 def get_longest_diverse_words(file_path: str) -> List[str]:
     with open(file_path, 'r', encoding='unicode-escape') as f:
         text = f.read()
-        string_punctuation = string.punctuation
-        text = "".join(ch for ch in text if ch not in string_punctuation)
+        text = "".join(ch for ch in text if ch not in string.punctuation)
         word_list = text.split()
         word_list = sorted(word_list, key=lambda x: (-len(set(x)), -len(x)))
         return word_list[:10]
@@ -24,8 +22,16 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
 def get_rarest_char(file_path: str) -> str:
     with open(file_path, 'r', encoding='unicode-escape') as f:
         text = f.read()
-        count = list(Counter(text))
-        return count[-1]
+        counter = {}
+        for elem in text:
+            if elem not in counter:
+                counter[elem] = 1
+            else:
+                counter[elem] += 1
+        minimum = min(counter.values())
+        for num, count in counter.items():
+            if count == minimum:
+                return num
 
 
 def count_punctuation_chars(file_path: str) -> int:
@@ -44,5 +50,6 @@ def count_non_ascii_chars(file_path: str) -> int:
 def get_most_common_non_ascii_char(file_path: str) -> str:
     with open(file_path, 'r', encoding='unicode-escape') as f:
         text = f.read()
-        return Counter(el for el in text if not el.isascii()).most_common()[0][0]
-
+        chars = [el for el in text if not el.isascii()]
+        chars_counter = {chars.count(el): el for el in set(chars)}
+        return chars_counter[max(chars_counter.keys())]
