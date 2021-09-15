@@ -1,5 +1,6 @@
 from unittest.mock import patch
 import pytest
+import requests
 from homework4.task2 import count_dots_on_i
 
 
@@ -28,7 +29,7 @@ def test4_count_dots_on_i():
 
 
 def test5_count_dots_on_i():
-    with patch('requests.get', side_effect=ConnectionError) as rg:
+    with patch('requests.get', side_effect=requests.exceptions.RequestException) as rg:
         rg.return_value.text = 'abcdefg'
         with pytest.raises(ValueError):
             count_dots_on_i("https://example.com")
