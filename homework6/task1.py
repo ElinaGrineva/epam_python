@@ -17,10 +17,10 @@ def instances_counter(cls):
         cls.__counter += 1
         return obj
 
-    def get_created_instances(self=None):
+    def get_created_instances():
         return cls.__counter
 
-    def reset_instances_counter(self=None):
+    def reset_instances_counter():
         count_before_reset = cls.__counter
         cls.__counter = 0
         return count_before_reset
@@ -30,6 +30,3 @@ def instances_counter(cls):
     setattr(cls, "reset_instances_counter", reset_instances_counter)
 
     return cls
-
-
-
