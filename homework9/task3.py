@@ -18,7 +18,7 @@ def universal_file_counter(
     dir_path: Path, file_extension: str, tokenizer: Optional[Callable] = None
 ) -> int:
     count = 0
-    for file in dir_path.glob("*." + file_extension):
+    for file in dir_path.glob(f"*.{file_extension}"):
         with open(file) as f:
             if tokenizer:
                 for line in f.readlines():
