@@ -6,7 +6,7 @@ class KeyValueStorage:
         self.my_dict = {}
         with open(filename, "r") as f:
             key_value = f.read()
-        key_value = [list(pair.split("=")) for pair in key_value.split()]
+        key_value = [tuple(pair.split("=")) for pair in key_value.split()]
         for pair in key_value:
             key, value = pair
             value = value.rstrip()

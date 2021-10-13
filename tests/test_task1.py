@@ -5,11 +5,13 @@ import pytest
 
 @pytest.fixture()
 def file_name(data: str):
-    filename = "task1.txt"
-    with open(filename, "w") as f:
-        f.write(data)
-    yield filename
-    os.remove(filename)
+    try:
+        filename = "task1.txt"
+        with open(filename, "w") as f:
+            f.write(data)
+        yield filename
+    finally:
+        os.remove(filename)
 
 
 @pytest.mark.parametrize(
